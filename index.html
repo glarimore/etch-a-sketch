@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>etch-a-sketch</title>
+  <meta name="description" content="Gustav Larimore">
+  <meta name="author" content="Gustav Larimore">
+
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <h1 style="text-align: center;">etch-a-sketch, bitches!</h1>
+  <button style="margin:auto">Enter new dimensions and reset</button>
+  <div id="container">
+  </div>
+</body>
+
+<script>
+  //Reference the grid container
+  const container = document.querySelector('#container');
+
+  //function for building the grid
+  function buildGrid(dimensions) {
+    for (i = 0; i < dimensions; i++) {
+      console.log ("in new row loop")
+      let newRow = document.createElement('div');
+      newRow.className = "row";
+      container.appendChild(newRow);
+
+      for (x = 1; x < dimensions + 1; x++) {
+        console.log (`in new square loop with i = ${i} and x = ${x}`)
+        let newSquare = document.createElement('div');
+        newSquare.className = "square";
+        newSquare.id = "square" + ((i * dimensions) + x);
+        newRow.appendChild(newSquare);
+      }
+    }
+  }
+
+  //function to cause squares to react on mouseover
+  function activateSquares() {
+    const squares = document.querySelectorAll('.square');
+    squares.forEach((div) => {
+      div.addEventListener('mouseover', () => {
+        div.classList.add("square-turned");
+      })
+    })
+  }
+
+  //build the initial grid
+  buildGrid(16);
+
+  //activate the initial squares
+  activateSquares();
+  
+  const button = document.querySelector('button');
+
+  button.addEventListener('click', () => {
+    newDimensions = prompt("Enter new dimensions! (max 100)");
+
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+
+    if (newDimensions > 100) {
+      newDimensions = 100;
+    }
+
+    if (newDimensions < 1) {
+      newDimensions = 1;
+    }
+    newDimensions = Math.floor(newDimensions);
+
+    buildGrid(newDimensions);
+
+    activateSquares();
+
+  })
+
+
+</script>
+
+</html>

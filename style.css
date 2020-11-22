@@ -1,0 +1,35 @@
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+button {
+  width: 30%;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  width: 960px;
+  height: 960px;
+  margin: 30px auto 0px auto;
+}
+
+.row, .square {
+  flex-grow: 1;
+}
+
+.row {
+  display: flex;;
+  margin: 0px;
+  padding: 0px;
+}
+
+.square {
+  border: black solid 1px;
+}
+
+.square-turned {
+  background-color: black;
+}
